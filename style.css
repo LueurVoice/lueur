@@ -1,0 +1,608 @@
+/* 基本設定とリセット */
+:root {
+    --bg-color: #03040a;
+    /* 限りなく黒に近い深いネイビー */
+    --text-color: #d8dee8;
+    /* ぼんやりとした白（少し青みがかっている） */
+    --accent-color: #fcfcfc;
+    /* ハイライト（白） */
+    --font-heading: 'Cormorant Garamond', serif;
+    /* タイトル用：静謐な英字フォント */
+    --font-body: 'Noto Serif JP', serif;
+    /* 本文用：美しい明朝体 */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-padding-top: 50px;
+    /* ヘッダ分 */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    line-height: 2.2;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* 常に画面全体にかかる、淡い光のオーバーレイ（月の光のようなイメージ）*/
+.light-overlay {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(30, 45, 80, 0.15) 0%, rgba(3, 4, 10, 0) 50%);
+    pointer-events: none;
+    /* クリック邪魔しない */
+    z-index: 1;
+    animation: drift 20s infinite alternate ease-in-out;
+}
+
+@keyframes drift {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+
+    100% {
+        transform: translateY(-5%) translateX(5%);
+    }
+}
+
+
+/* コンテンツエリア（中央寄せ、細身で美しいレイアウト） */
+.container {
+    position: relative;
+    z-index: 10;
+    /* 雨や光より上に配置 */
+    max-width: 600px;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    /* 淡く発光 */
+}
+
+.subtitle {
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    color: #8c9bb0;
+    margin-bottom: 30px;
+}
+
+.concept {
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 60px;
+}
+
+.concept p {
+    margin-bottom: 2em;
+}
+
+/* シンプルなナビゲーション（リンク） */
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+    position: relative;
+    transition: color 0.4s ease;
+}
+
+nav a:hover {
+    color: var(--accent-color);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* 下線のホバーアニメーション */
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background-color: var(--accent-color);
+    transition: all 0.4s ease;
+    transform: translateX(-50%);
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+
+/* フェードインアニメーション用クラス（JSで制御する場合はここで定義）*/
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInAnim 2s forwards ease-out;
+}
+
+.delay-1 {
+    animation-delay: 1.5s;
+}
+
+.delay-2 {
+    animation-delay: 3s;
+}
+
+@keyframes fadeInAnim {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 雨を降らせるキャンバス用のスタイル */
+#rain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.drop {
+    position: absolute;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.25));
+    width: 1px;
+    height: 80px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+/* -------------------------------------
+   各セクション共通
+------------------------------------- */
+.section {
+    padding: 100px 0;
+    margin-top: 50px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.section-desc {
+    font-size: 0.9rem;
+    color: #8c9bb0;
+    margin-bottom: 50px;
+}
+
+.content-block {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 40px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* -------------------------------------
+   Voicesセクション
+------------------------------------- */
+.voice-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.voice-card {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    text-align: left;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.voice-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.voice-image.placeholder {
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(135deg, #0a0e17 0%, #151b29 100%);
+    border-radius: 4px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.2);
+    font-family: var(--font-heading);
+    font-style: italic;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+/* 実際の画像が入った場合のスタイル（準備） */
+.voice-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    filter: brightness(0.8) contrast(1.1);
+}
+
+.voice-card h3 {
+    font-size: 1.4rem;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+    letter-spacing: 0.1em;
+}
+
+.voice-catch {
+    font-size: 0.85rem;
+    color: #8c9bb0;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.voice-desc {
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+/* -------------------------------------
+   Link / Footer
+------------------------------------- */
+.yt-btn {
+    display: inline-block;
+    padding: 15px 40px;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--text-color);
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.yt-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+
+.footer {
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+    color: #5a6678;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+/* -------------------------------------
+   トーン別カラー（UIのアクセント）
+------------------------------------- */
+.voice-card.tone-clear {
+    border-top: 2px solid #b0c4de;
+    /* アッシュブルー・ペールグレー */
+}
+
+.voice-card.tone-clear:hover {
+    border-color: #b0c4de;
+    box-shadow: 0 0 20px rgba(176, 196, 222, 0.15);
+}
+
+.voice-card.tone-mild {
+    border-top: 2px solid #a38c9b;
+    /* モーブ・くすみ紫 */
+}
+
+.voice-card.tone-mild:hover {
+    border-color: #a38c9b;
+    box-shadow: 0 0 20px rgba(163, 140, 155, 0.15);
+}
+
+.voice-card.tone-deep {
+    border-top: 2px solid #4a5c78;
+    /* ディープネイビー・ダークグレー */
+}
+
+.voice-card.tone-deep:hover {
+    border-color: #4a5c78;
+    box-shadow: 0 0 20px rgba(74, 92, 120, 0.2);
+}
+
+/* -------------------------------------
+   ランダムメッセージ（お守り機能）
+------------------------------------- */
+.random-message {
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    color: #d8dee8;
+    margin-bottom: 60px;
+    padding: 12px 25px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    display: inline-block;
+    font-style: italic;
+}
+
+/* -------------------------------------
+   Libraryセクション (フィルター & 検索結果)
+------------------------------------- */
+
+/* フィルターボタン群 */
+.filter-group {
+    margin-bottom: 25px;
+}
+
+.filter-title {
+    font-size: 0.9rem;
+    color: #8c9bb0;
+    margin-bottom: 12px;
+    letter-spacing: 0.1em;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.filter-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #8c9bb0;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-body);
+}
+
+.filter-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: var(--text-color);
+}
+
+.filter-btn.active {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: var(--accent-color);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.filter-btn#fav-filter-btn {
+    color: #ffd700;
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+.filter-btn#fav-filter-btn:hover,
+.filter-btn#fav-filter-btn.active {
+    background: rgba(255, 215, 0, 0.15);
+    border-color: rgba(255, 215, 0, 0.5);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
+}
+
+/* ライブラリリスト (カードデザイン) */
+.library-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.library-item {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    text-align: left;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.library-item:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.library-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.library-item-title {
+    font-size: 1.3rem;
+    color: var(--accent-color);
+    margin: 0;
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+    padding-right: 15px;
+}
+
+.library-fav-btn {
+    background: none;
+    border: none;
+    color: #5a6678;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+    line-height: 1;
+}
+
+.library-fav-btn.active,
+.library-fav-btn:hover {
+    color: #ffd700;
+    transform: scale(1.1);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.library-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+    color: #8c9bb0;
+}
+
+.library-tag {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.library-desc {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    color: var(--text-color);
+}
+
+/* ボタンとYouTube埋め込み */
+.library-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.library-play-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 25px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.95rem;
+    display: inline-block;
+    transition: all 0.3s ease;
+    font-family: var(--font-body);
+}
+
+.library-play-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: var(--accent-color);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.youtube-player-container {
+    margin-top: 25px;
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9アスペクト比 */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    border-radius: 6px;
+    background: #000;
+    display: none;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.youtube-player-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.youtube-player-container.active {
+    display: block;
+    animation: fadeInAnim 0.6s forwards;
+}
+
+.no-results {
+    text-align: center;
+    color: #8c9bb0;
+    padding: 50px 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    font-size: 0.95rem;
+}
+
+/* --------------------------------------------------
+   Coming Soon (準備中のダミー枠)
+-------------------------------------------------- */
+.library-item.coming-soon {
+    opacity: 0.15;
+    /* さらに深く暗く（半透明に） */
+    filter: grayscale(100%) brightness(0.5);
+    /* 完全に色を抜き、さらに暗さを足す */
+    position: relative;
+    pointer-events: none;
+    /* クリックやホバーを無効化 */
+}
+
+/* 枠の上に「Coming Soon...」の文字を重ねる */
+.library-item.coming-soon::after {
+    content: "Coming Soon...";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.2em;
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
+    white-space: nowrap;
+    /* ★「Coming」と「Soon」が絶対に改行されないようにする */
+    pointer-events: none;
+}
+
+.library-item.coming-soon .library-play-btn,
+.library-item.coming-soon .library-fav-btn {
+    display: none;
+    /* ボタン類は非表示にする */
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Library | Lueur</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+JP:wght@200;300;400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- 雨粒アニメーション用コンテナ -->
+    <div id="rain-container"></div>
+
+    <!-- 全体を包むかすかな光のオーバーレイ -->
+    <div class="light-overlay"></div>
+
+    <main class="container">
+        <header class="fade-in">
+            <h1 class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">Lueur</a></h1>
+            <p class="subtitle">Voice Library</p>
+        </header>
+
+        <nav class="fade-in delay-1">
+            <ul>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="library.html" class="nav-link"
+                        style="color: var(--accent-color); text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);">Library</a>
+                </li>
+                <li><a href="index.html#link" class="nav-link">Link</a></li>
+            </ul>
+        </nav>
+
+        <!-- Libraryセクション (検索機能) -->
+        <section id="library" class="section fade-in delay-2"
+            style="margin-top: 0; padding-top: 50px; border-top: none;">
+            <p class="section-desc">キャラや長さ、今の温度から、あなたに寄り添う声を見つけてください。</p>
+
+            <div class="content-block" style="margin-bottom: 40px; text-align: left;">
+                <!-- 雰囲気 -->
+                <div class="filter-group">
+                    <h4 class="filter-title">Mood (今の気持ち)</h4>
+                    <div class="filter-buttons" data-filter-group="mood">
+                        <button class="filter-btn active" data-filter="all">すべて</button>
+                        <button class="filter-btn" data-filter="sleep">眠れない夜に</button>
+                        <button class="filter-btn" data-filter="comfort">慰めてほしい</button>
+                        <button class="filter-btn" data-filter="work">作業・読書のお供に</button>
+                    </div>
+                </div>
+
+                <!-- 長さ -->
+                <div class="filter-group">
+                    <h4 class="filter-title">Length (時間の長さ)</h4>
+                    <div class="filter-buttons" data-filter-group="length">
+                        <button class="filter-btn active" data-filter="all">すべて</button>
+                        <button class="filter-btn" data-filter="short">5分以内</button>
+                        <button class="filter-btn" data-filter="medium">10〜15分</button>
+                        <button class="filter-btn" data-filter="long">15分以上</button>
+                    </div>
+                </div>
+
+                <!-- オプション -->
+                <div class="filter-group" style="margin-bottom: 0;">
+                    <h4 class="filter-title">Option (特別)</h4>
+                    <div class="filter-buttons">
+                        <button class="filter-btn toggle-btn" id="fav-filter-btn">★ お気に入りのみ表示</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 音声リスト (JSで生成) -->
+            <div class="library-list" id="library-list"></div>
+        </section>
+
+    </main>
+
+    <footer class="footer fade-in">
+        <p><small>&copy; Lueur Project / Voice: ﾏﾁｭﾘﾝ</small></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
