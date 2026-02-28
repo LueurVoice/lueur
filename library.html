@@ -24,7 +24,7 @@
             <p class="subtitle">Voice Library</p>
         </header>
 
-        <nav class="fade-in delay-1">
+        <nav class="fade-in">
             <ul>
                 <li><a href="index.html#about" class="nav-link">About</a></li>
                 <li><a href="library.html" class="nav-link"
@@ -35,8 +35,7 @@
         </nav>
 
         <!-- Libraryセクション (検索機能) -->
-        <section id="library" class="section fade-in delay-2"
-            style="margin-top: 0; padding-top: 50px; border-top: none;">
+        <section id="library" class="section fade-in" style="margin-top: 0; padding-top: 50px; border-top: none;">
             <p class="section-desc">キャラや長さ、今の温度から、あなたに寄り添う声を見つけてください。</p>
 
             <div class="content-block" style="margin-bottom: 40px; text-align: left;">
@@ -59,6 +58,51 @@
                         <button class="filter-btn" data-filter="short">5分以内</button>
                         <button class="filter-btn" data-filter="medium">10〜15分</button>
                         <button class="filter-btn" data-filter="long">15分以上</button>
+                    </div>
+                </div>
+
+                <!-- 詳細検索（アコーディオン開閉ボタン） -->
+                <div class="filter-group" style="margin-top: 20px;">
+                    <button class="filter-btn toggle-btn" id="advanced-search-toggle"
+                        style="width: 100%; border-style: dashed;">🔍 詳細検索を開く</button>
+                </div>
+
+                <!-- 詳細検索パネル（初期状態は非表示） -->
+                <div id="advanced-search-panel" class="advanced-search-panel"
+                    style="display: none; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 8px; margin-bottom: 20px;">
+
+                    <div class="filter-group">
+                        <h4 class="filter-title">Situation (シチュエーション)</h4>
+                        <div class="filter-buttons advanced-tags" data-filter-group="situation">
+                            <label class="tag-checkbox"><input type="checkbox" value="添い寝"> 添い寝</label>
+                            <label class="tag-checkbox"><input type="checkbox" value="慰め"> 慰め</label>
+                            <label class="tag-checkbox"><input type="checkbox" value="看病"> 看病</label>
+                            <label class="tag-checkbox"><input type="checkbox" value="雑談"> 雑談</label>
+                            <label class="tag-checkbox"><input type="checkbox" value="朗読"> 朗読</label>
+                            <label class="tag-checkbox"><input type="checkbox" value="作業見守り"> 作業見守り</label>
+                            <label class="tag-checkbox"><input type="checkbox" value="隣に座る"> 隣に座る</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4 class="filter-title">Texture (音の質感)</h4>
+                        <div class="filter-buttons advanced-tags" data-filter-group="texture">
+                            <label class="tag-checkbox"><input type="checkbox" value="吐息"> 吐息</label>
+                            <label class="tag-checkbox"><input type="checkbox" value="囁き"> 囁き</label>
+                            <label class="tag-checkbox"><input type="checkbox" value="耳かき"> 耳かき</label>
+                            <label class="tag-checkbox"><input type="checkbox" value="ポンポン"> ポンポン</label>
+                            <label class="tag-checkbox"><input type="checkbox" value="雨音"> 雨音</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4 class="filter-title">Type (用途・仕様)</h4>
+                        <div class="filter-buttons advanced-tags" data-filter-group="type">
+                            <label class="tag-checkbox"><input type="checkbox" value="睡眠導入"> 睡眠導入</label>
+                            <label class="tag-checkbox"><input type="checkbox" value="作業用BGM"> 作業用BGM</label>
+                            <label class="tag-checkbox"><input type="checkbox" value="ASMR"> ASMR</label>
+                            <label class="tag-checkbox"><input type="checkbox" value="バイノーラル"> バイノーラル</label>
+                        </div>
                     </div>
                 </div>
 
