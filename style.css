@@ -623,22 +623,7 @@ nav a:hover::after {
     /* クリックやホバーを無効化 */
 }
 
-/* 枠の上に「Coming Soon...」の文字を重ねる */
-.library-item.coming-soon::after {
-    content: "Coming Soon...";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    color: rgba(255, 255, 255, 0.7);
-    letter-spacing: 0.2em;
-    text-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
-    white-space: nowrap;
-    /* ★「Coming」と「Soon」が絶対に改行されないようにする */
-    pointer-events: none;
-}
+
 
 .library-item.coming-soon .library-play-btn,
 .library-item.coming-soon .library-fav-btn {
