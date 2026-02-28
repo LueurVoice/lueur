@@ -412,8 +412,9 @@ function renderLibrary() {
                 container.classList.remove('active');
                 this.textContent = '▶ サイト内で再生';
             } else {
-                // 開く（iframe生成）
-                container.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                // 開く（iframe生成）- エラー153対策としてoriginパラメータを追加、ドメイン制限を回避しやすい設定へ
+                const domain = window.location.origin;
+                container.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&origin=${domain}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
                 container.classList.add('active');
                 this.textContent = '▼ 閉じる';
             }
