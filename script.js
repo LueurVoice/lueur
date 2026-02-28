@@ -138,26 +138,26 @@ if (messageContainer) {
 const voiceData = [
     {
         id: "v001",
-        title: "【自己紹介/ASMR】ここは「Lueur」疲れ果てたあなたのための隠れ家です",
+        title: "ここは「Lueur」疲れ果てたあなたのための隠れ家です",
         mood: ["sleep", "comfort"],
         length: "short",
         duration: "01:43",
         desc: "Lueurの世界へようこそ。眠れない夜、孤独を感じる日に寄り添う最初の声。",
         toneClass: "tone-clear",
-        tags: ["自己紹介", "睡眠導入"],
+        tags: ["自己紹介", "睡眠導入", "囁き"],
         isPremium: false,
         url: "https://youtu.be/uCL4tZEmi2w",
         videoId: "uCL4tZEmi2w"
     },
     {
         id: "v002",
-        title: "甘い、夜更かし。【睡眠導入/雨音】",
+        title: "甘い、夜更かし。",
         mood: ["comfort", "sleep"],
         length: "medium",
-        duration: "04:01", // YouTube版の長さ
-        desc: "頑張りすぎたあなたへ。隣に座って、ただただ甘やかす特別な夜。完全版(全20分)はBOOTHにて。",
+        duration: "06:45", // 正確な時間に修正
+        desc: "頑張りすぎたあなたへ。隣に座って、ただただ甘やかす特別な夜。",
         toneClass: "tone-mild",
-        tags: ["慰め", "睡眠導入", "囁き"],
+        tags: ["隣に座る", "慰め", "睡眠導入", "囁き", "雨音"],
         isPremium: false,
         isComingSoon: false,
         url: "https://www.youtube.com/watch?v=rX7rbd9Th_A",
@@ -172,7 +172,7 @@ const voiceData = [
         duration: "30:00",
         desc: "作業用・睡眠導入用。共に静かな時間を過ごす30分。",
         toneClass: "tone-deep",
-        tags: ["作業用"],
+        tags: ["作業用BGM", "雨音"],
         isPremium: false,
         isComingSoon: true,
         url: "",
@@ -186,7 +186,7 @@ const voiceData = [
         duration: "45:00",
         desc: "ぽつりぽつりとこぼす声が、あなたが眠りにつくまで付き添います。",
         toneClass: "tone-clear",
-        tags: ["睡眠導入"],
+        tags: ["睡眠導入", "添い寝", "囁き"],
         isPremium: false,
         isComingSoon: true,
         url: "",
@@ -194,13 +194,13 @@ const voiceData = [
     },
     {
         id: "v005",
-        title: "【極上バイノーラル】耳元で囁く完全睡眠導入",
+        title: "耳元で囁く完全睡眠導入",
         mood: ["sleep"],
         length: "long",
         duration: "60:00",
         desc: "ダミーヘッドマイクを使用した高音質版。深い眠りに落ちるまで、あなたの耳元から離れません。",
         toneClass: "tone-deep",
-        tags: ["睡眠導入", "バイノーラル"],
+        tags: ["睡眠導入", "バイノーラル", "吐息", "耳かき"],
         isPremium: true,
         isComingSoon: true,
         price: "¥500",
@@ -299,9 +299,24 @@ function renderLibrary() {
 
     // フィルター処理
     const filtered = voiceData.filter(item => {
+        // 1. 簡易検索（Mood, Length, Fav）の判定
         if (activeFilters.mood !== 'all' && !item.mood.includes(activeFilters.mood)) return false;
         if (activeFilters.length !== 'all' && item.length !== activeFilters.length) return false;
         if (activeFilters.favorite && !favorites.includes(item.id)) return false;
+
+        // 2. 詳細検索（チェックされたタグ）の判定
+        // 詳細パネル内でチェックがついているすべての checkbox 要素を取得
+        const checkedTags = Array.from(document.querySelectorAll('.advanced-search-panel input[type="checkbox"]:checked')).map(cb => cb.value);
+
+        // チェックされているタグがある場合、その「すべて」を含んでいるか（AND検索）チェックする
+        if (checkedTags.length > 0) {
+            // item.tags に checkedTagsの要素がすべて含まれているか
+            const hasAllTags = checkedTags.every(tag => item.tags.includes(tag));
+            if (!hasAllTags) {
+                return false;
+            }
+        }
+
         return true;
     });
 
@@ -396,8 +411,8 @@ function renderLibrary() {
     });
 }
 
-// フィルターボタンのクリックイベント
-document.querySelectorAll('.filter-btn').forEach(btn => {
+// 簡易フィルターボタンのクリックイベント
+document.querySelectorAll('.filter-btn:not(#advanced-search-toggle)').forEach(btn => {
     btn.addEventListener('click', function () {
         if (this.id === 'fav-filter-btn') {
             activeFilters.favorite = !activeFilters.favorite;
@@ -413,6 +428,31 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 
             activeFilters[group] = val;
         }
+        renderLibrary();
+    });
+});
+
+// 詳細検索アコーディオンの開閉処理
+const advancedSearchToggle = document.getElementById('advanced-search-toggle');
+const advancedSearchPanel = document.getElementById('advanced-search-panel');
+
+if (advancedSearchToggle && advancedSearchPanel) {
+    advancedSearchToggle.addEventListener('click', function () {
+        if (advancedSearchPanel.style.display === 'none') {
+            advancedSearchPanel.style.display = 'block';
+            this.textContent = '▲ 詳細検索を閉じる';
+            this.classList.add('active');
+        } else {
+            advancedSearchPanel.style.display = 'none';
+            this.textContent = '🔍 詳細検索を開く';
+            this.classList.remove('active');
+        }
+    });
+}
+
+// 詳細検索内の各チェックボックス変更時の再描画イベント
+document.querySelectorAll('.advanced-search-panel input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
         renderLibrary();
     });
 });
