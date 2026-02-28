@@ -151,17 +151,18 @@ const voiceData = [
     },
     {
         id: "v002",
-        title: "今日はもう、何もしなくていいよ",
+        title: "甘い、夜更かし。【睡眠導入/雨音】",
         mood: ["comfort", "sleep"],
         length: "medium",
-        duration: "12:00",
-        desc: "頑張りすぎたあなたへ。隣に座って、ただただ甘やかす12分間。",
+        duration: "04:01", // YouTube版の長さ
+        desc: "頑張りすぎたあなたへ。隣に座って、ただただ甘やかす特別な夜。完全版(全20分)はBOOTHにて。",
         toneClass: "tone-mild",
-        tags: ["慰め"],
+        tags: ["慰め", "睡眠導入", "囁き"],
         isPremium: false,
-        isComingSoon: true,
-        url: "",
-        videoId: ""
+        isComingSoon: false,
+        url: "https://www.youtube.com/watch?v=rX7rbd9Th_A",
+        videoId: "rX7rbd9Th_A",
+        boothUrl: "" // ※将来フル尺を置いた時用
     },
     {
         id: "v003",
