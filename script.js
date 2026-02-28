@@ -336,35 +336,45 @@ function renderLibrary() {
         // タグのHTML生成
         const tagsHtml = item.tags.map(t => `<span class="library-tag">${t}</span>`).join('');
 
-        card.innerHTML = `
-            <div class="library-item-header">
-                <h3 class="library-item-title">
-                    ${item.isPremium ? '<span class="premium-badge">👑 Premium</span>' : ''} 
-                    ${item.title}
-                </h3>
-                <button class="library-fav-btn ${isFav ? 'active' : ''}" data-id="${item.id}" title="お気に入りに登録">
-                    ${isFav ? '★' : '☆'}
-                </button>
-            </div>
-            <div class="library-meta">
-                <span>⏱ ${item.duration}</span>
-                ${item.isPremium && item.price ? `<span class="premium-price">${item.price}</span>` : ''}
-                ${tagsHtml}
-            </div>
-            <p class="library-desc">${item.desc}</p>
-            <div class="library-actions">
-                ${item.videoId
-                ? `<button class="library-play-btn embed-play-btn" data-video-id="${item.videoId}">▶ ${item.isPremium ? 'サイト内で試聴' : 'サイト内で再生'}</button>`
-                : ''}
-                ${!item.videoId && (item.youtubeUrl || (!item.isPremium && item.url))
-                ? `<a href="${item.youtubeUrl || item.url}" class="library-play-btn" target="_blank">▶ YouTubeで開く</a>`
-                : ''}
-                ${item.boothUrl || (item.isPremium && item.url)
-                ? `<a href="${item.boothUrl || item.url}" class="library-play-btn buy-btn" target="_blank">🛒 BOOTHで${item.videoId || item.youtubeUrl ? '本編を' : ''}購入する</a>`
-                : ''}
-            </div>
-            <div class="youtube-player-container" id="player-container-${item.id}"></div>
-        `;
+        if (item.isComingSoon) {
+            // Coming Soonの場合は中身を生成せず、シンプルな枠と文字だけにする
+            card.innerHTML = `
+                <div style="display: flex; justify-content: center; align-items: center; height: 150px; flex-direction: column;">
+                    <span style="font-size: 1.5rem; letter-spacing: 0.2em; color: rgba(255, 255, 255, 0.3);">Coming Soon...</span>
+                </div>
+            `;
+        } else {
+            // 本公開されている場合のみ、中身を描画する
+            card.innerHTML = `
+                <div class="library-item-header">
+                    <h3 class="library-item-title">
+                        ${item.isPremium ? '<span class="premium-badge">👑 Premium</span>' : ''} 
+                        ${item.title}
+                    </h3>
+                    <button class="library-fav-btn ${isFav ? 'active' : ''}" data-id="${item.id}" title="お気に入りに登録">
+                        ${isFav ? '★' : '☆'}
+                    </button>
+                </div>
+                <div class="library-meta">
+                    <span>⏱ ${item.duration}</span>
+                    ${item.isPremium && item.price ? `<span class="premium-price">${item.price}</span>` : ''}
+                    ${tagsHtml}
+                </div>
+                <p class="library-desc">${item.desc}</p>
+                <div class="library-actions">
+                    ${item.videoId
+                    ? `<button class="library-play-btn embed-play-btn" data-video-id="${item.videoId}">▶ ${item.isPremium ? 'サイト内で試聴' : 'サイト内で再生'}</button>`
+                    : ''}
+                    ${!item.videoId && (item.youtubeUrl || (!item.isPremium && item.url))
+                    ? `<a href="${item.youtubeUrl || item.url}" class="library-play-btn" target="_blank">▶ YouTubeで開く</a>`
+                    : ''}
+                    ${item.boothUrl || (item.isPremium && item.url)
+                    ? `<a href="${item.boothUrl || item.url}" class="library-play-btn buy-btn" target="_blank">🛒 BOOTHで${item.videoId || item.youtubeUrl ? '本編を' : ''}購入する</a>`
+                    : ''}
+                </div>
+                <div class="youtube-player-container" id="player-container-${item.id}"></div>
+            `;
+        }
         libraryList.appendChild(card);
     });
 
