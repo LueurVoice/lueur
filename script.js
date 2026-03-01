@@ -166,17 +166,17 @@ const voiceData = [
     },
     {
         id: "v003",
-        title: "雨音と本の匂い",
-        mood: ["work", "sleep"],
-        length: "long",
-        duration: "30:00",
-        desc: "静かな読書と、隣の気配。",
-        toneClass: "tone-deep",
-        tags: ["作業用BGM", "雨音"],
+        title: "雨宿りの場所",
+        mood: ["sleep", "comfort"],
+        length: "medium",
+        duration: "07:41",
+        desc: "外の雨がひどいから。ここで少し、雨宿りしていって。",
+        toneClass: "tone-clear",
+        tags: ["睡眠導入", "語りかけ", "雨音"],
         isPremium: false,
-        isComingSoon: true,
-        url: "",
-        videoId: ""
+        isComingSoon: false,
+        url: "https://youtu.be/PSb13FUFdao",
+        videoId: "PSb13FUFdao"
     },
     {
         id: "v004",
@@ -339,7 +339,7 @@ function renderLibrary() {
         if (item.isComingSoon) {
             // Coming Soonの場合は中身を生成せず、シンプルな枠と文字だけにする
             card.innerHTML = `
-                <div style="display: flex; justify-content: center; align-items: center; height: 150px; flex-direction: column;">
+                <div style="display: flex; justify-content: center; align-items: center; height: 100%; min-height: 150px; flex-direction: column;">
                     <span style="font-size: 1.5rem; letter-spacing: 0.2em; color: rgba(255, 255, 255, 0.3);">Coming Soon...</span>
                 </div>
             `;
@@ -357,6 +357,7 @@ function renderLibrary() {
                 </div>
             `;
         }
+
         libraryList.appendChild(card);
     });
 
@@ -383,7 +384,7 @@ function renderLibrary() {
     });
 
     // カードクリックでモーダルを開くイベントを設定
-    document.querySelectorAll('.library-item:not(.coming-soon)').forEach((card, index) => {
+    document.querySelectorAll('.library-item').forEach((card, index) => {
         card.addEventListener('click', function (e) {
             // お気に入りボタンのクリックは弾く
             if (e.target.closest('.library-fav-btn')) return;
@@ -409,9 +410,9 @@ function openModal(item) {
     // Play button logic
     let actionsHtml = '';
     if (item.videoId) {
-        actionsHtml += `<button class="library-play-btn embed-play-btn" data-video-id="${item.videoId}">▶ サイト内で${item.isPremium ? '試聴' : '再生'}</button>`;
+        actionsHtml += `<button class="library-play-btn embed-play-btn" data-video-id="${item.videoId}">▶ ${item.isPremium ? '少しだけ灯す' : '灯りをともす'}</button>`;
     } else if (item.youtubeUrl || (!item.isPremium && item.url)) {
-        actionsHtml += `<a href="${item.youtubeUrl || item.url}" class="library-play-btn" target="_blank">▶ YouTube</a>`;
+        actionsHtml += `<a href="${item.youtubeUrl || item.url}" class="library-play-btn" target="_blank">▶ YouTubeへの扉</a>`;
     }
 
     if (item.boothUrl || (item.isPremium && item.url)) {
@@ -464,13 +465,13 @@ function openModal(item) {
                 // すでに開いていれば閉じる（iframe削除）
                 container.innerHTML = '';
                 container.classList.remove('active');
-                this.textContent = '▶ サイト内で再生';
+                this.textContent = item.isPremium ? '▶ 少しだけ灯す' : '▶ 灯りをともす';
             } else {
                 // 開く（iframe生成）
                 const domain = window.location.origin;
                 container.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&origin=${domain}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
                 container.classList.add('active');
-                this.textContent = '▼ 閉じる';
+                this.textContent = '▼ 灯りを消す';
             }
         });
     }
