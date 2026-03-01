@@ -66,7 +66,7 @@ body {
     position: relative;
     z-index: 10;
     /* 雨や光より上に配置 */
-    max-width: 600px;
+    max-width: 900px;
     padding: 40px 20px;
     text-align: center;
 }
@@ -143,15 +143,12 @@ nav a:hover::after {
 /* フェードインアニメーション用クラス（JSで制御する場合はここで定義）*/
 .fade-in {
     opacity: 0;
-    transform: translateY(20px);
     animation: fadeInAnim 2s forwards ease-out;
 }
-
 
 @keyframes fadeInAnim {
     to {
         opacity: 1;
-        transform: translateY(0);
     }
 }
 
@@ -231,7 +228,6 @@ nav a:hover::after {
 }
 
 .voice-card:hover {
-    transform: translateY(-5px);
     border-color: rgba(255, 255, 255, 0.15);
 }
 
@@ -299,7 +295,6 @@ nav a:hover::after {
     background-color: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.4);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
 }
 
 
@@ -469,49 +464,163 @@ nav a:hover::after {
 
 /* ライブラリリスト (カードデザイン) */
 .library-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 30px;
+    align-items: start;
 }
 
 .library-item {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 30px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    text-align: left;
-    transition: transform 0.4s ease, border-color 0.4s ease;
+    padding: 25px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    /* フレックスアイテムが中身のコンテンツサイズに引っ張られて広がるのを防ぐ */
 }
 
 .library-item:hover {
-    transform: translateY(-3px);
-    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.library-item.open {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .library-item-header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 15px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none;
+    /* Let clicks pass to the parent card */
 }
 
 .library-item-title {
-    font-size: 1.3rem;
-    color: var(--accent-color);
+    font-size: 1.15rem;
+    color: var(--text-color);
     margin: 0;
     letter-spacing: 0.05em;
     line-height: 1.4;
-    padding-right: 15px;
+    transition: color 0.3s;
+}
+
+.library-item:hover .library-item-title,
+.library-item.open .library-item-title {
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.library-subtitle {
+    font-size: 0.8rem;
+    color: #8c9bb0;
+    margin-bottom: 0;
+}
+
+/* ======== モーダルUI (ポップアップ) ======== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.modal-overlay.fade-in {
+    opacity: 1;
+}
+
+.modal-overlay.fade-out {
+    opacity: 0;
+}
+
+.modal-content {
+    background: rgba(10, 14, 23, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.05);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.modal-close-btn:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.modal-header h2 {
+    font-size: 1.8rem;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+    letter-spacing: 0.1em;
+}
+
+.modal-header p {
+    font-size: 0.85rem;
+    color: #8c9bb0;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .library-fav-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
     background: none;
     border: none;
-    color: #5a6678;
-    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.15);
+    font-size: 1.6rem;
     cursor: pointer;
     transition: color 0.3s ease, transform 0.2s ease;
     line-height: 1;
+    z-index: 2;
 }
 
 .library-fav-btn.active,
@@ -525,30 +634,43 @@ nav a:hover::after {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
+    gap: 8px;
     margin-bottom: 15px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: #8c9bb0;
+    width: 100%;
+    /* ここを追加 */
 }
 
 .library-tag {
     background: rgba(255, 255, 255, 0.05);
-    padding: 4px 12px;
+    padding: 3px 10px;
     border-radius: 4px;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .library-desc {
-    font-size: 0.95rem;
-    line-height: 1.8;
+    font-size: 0.9rem;
+    line-height: 1.6;
     margin-bottom: 25px;
-    color: var(--text-color);
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    word-break: auto-phrase;
+    /* いい感じに改行 */
+    overflow-wrap: break-word;
+    /* 枠からはみ出ないように強制改行 */
+    width: 100%;
 }
 
 /* ボタンとYouTube埋め込み */
 .library-actions {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 15px;
+    margin-top: 30px;
+    width: 100%;
 }
 
 .library-play-btn {
@@ -579,7 +701,7 @@ nav a:hover::after {
     /* 16:9アスペクト比 */
     height: 0;
     overflow: hidden;
-    max-width: 100%;
+    width: 100%;
     border-radius: 6px;
     background: #000;
     display: none;
@@ -597,7 +719,17 @@ nav a:hover::after {
 
 .youtube-player-container.active {
     display: block;
-    animation: fadeInAnim 0.6s forwards;
+    animation: fadeInPlayer 0.8s ease forwards;
+}
+
+@keyframes fadeInPlayer {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .no-results {
@@ -629,4 +761,11 @@ nav a:hover::after {
 .library-item.coming-soon .library-fav-btn {
     display: none;
     /* ボタン類は非表示にする */
+}
+
+/* スマホ等での1列表示 fallback */
+@media (max-width: 768px) {
+    .library-list {
+        grid-template-columns: 1fr;
+    }
 }

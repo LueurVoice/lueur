@@ -138,11 +138,11 @@ if (messageContainer) {
 const voiceData = [
     {
         id: "v001",
-        title: "ここは「Lueur」疲れ果てたあなたのための隠れ家です",
+        title: "最初の灯り",
         mood: ["sleep", "comfort"],
         length: "short",
         duration: "01:43",
-        desc: "Lueurの世界へようこそ。眠れない夜、孤独を感じる日に寄り添う最初の声。",
+        desc: "最初の声。孤独な夜のための隠れ家。",
         toneClass: "tone-clear",
         tags: ["自己紹介", "睡眠導入", "囁き"],
         isPremium: false,
@@ -151,11 +151,11 @@ const voiceData = [
     },
     {
         id: "v002",
-        title: "甘い、夜更かし。",
+        title: "甘い、夜更かし",
         mood: ["comfort", "sleep"],
         length: "medium",
         duration: "06:45", // 正確な時間に修正
-        desc: "頑張りすぎたあなたへ。隣に座って、ただただ甘やかす特別な夜。",
+        desc: "頑張りすぎたあなたへ。ただ甘やかす特別な夜。",
         toneClass: "tone-mild",
         tags: ["隣に座る", "慰め", "睡眠導入", "囁き", "雨音"],
         isPremium: false,
@@ -166,11 +166,11 @@ const voiceData = [
     },
     {
         id: "v003",
-        title: "雨降る夜の、静かな読書タイム",
+        title: "雨音と本の匂い",
         mood: ["work", "sleep"],
         length: "long",
         duration: "30:00",
-        desc: "作業用・睡眠導入用。共に静かな時間を過ごす30分。",
+        desc: "静かな読書と、隣の気配。",
         toneClass: "tone-deep",
         tags: ["作業用BGM", "雨音"],
         isPremium: false,
@@ -180,11 +180,11 @@ const voiceData = [
     },
     {
         id: "v004",
-        title: "不安で眠れないなら、朝まで一緒に",
+        title: "朝まで一緒に",
         mood: ["sleep"],
         length: "long",
         duration: "45:00",
-        desc: "ぽつりぽつりとこぼす声が、あなたが眠りにつくまで付き添います。",
+        desc: "ぽつりぽつりとこぼす声。あなたが眠りにつくまで。",
         toneClass: "tone-clear",
         tags: ["睡眠導入", "添い寝", "囁き"],
         isPremium: false,
@@ -194,11 +194,11 @@ const voiceData = [
     },
     {
         id: "v005",
-        title: "耳元で囁く完全睡眠導入",
+        title: "完全睡眠導入",
         mood: ["sleep"],
         length: "long",
         duration: "60:00",
-        desc: "ダミーヘッドマイクを使用した高音質版。深い眠りに落ちるまで、あなたの耳元から離れません。",
+        desc: "深い眠りに落ちるまでの、耳元での囁き。",
         toneClass: "tone-deep",
         tags: ["睡眠導入", "バイノーラル", "吐息", "耳かき"],
         isPremium: true,
@@ -209,11 +209,11 @@ const voiceData = [
     },
     {
         id: "v006",
-        title: "少しだけ泣きたい夜の、ホットミルク",
+        title: "ホットミルク",
         mood: ["comfort"],
         length: "short",
         duration: "08:30",
-        desc: "誰にも言えない辛さを吐き出したい時。ただ黙って、背中を撫で続けます。",
+        desc: "少し泣きたい夜に。ただ黙って、背中を撫で長ける。",
         toneClass: "tone-mild",
         tags: ["慰め"],
         isPremium: false,
@@ -223,11 +223,11 @@ const voiceData = [
     },
     {
         id: "v007",
-        title: "【特別編】看病ボイス - 熱を出したあなたへ",
+        title: "看病",
         mood: ["comfort", "sleep"],
         length: "medium",
         duration: "25:00",
-        desc: "風邪をひいて心細い夜。氷を替え、手を握り、あなたが安心するまで看病します。",
+        desc: "風邪をひいて心細い夜。あなたが安心するまで。",
         toneClass: "tone-mild",
         tags: ["看病", "甘やかし"],
         isPremium: true,
@@ -238,11 +238,11 @@ const voiceData = [
     },
     {
         id: "v008",
-        title: "深夜2時の勉強会。たまには息抜きも必要",
+        title: "深夜の勉強会",
         mood: ["work"],
         length: "long",
         duration: "50:00",
-        desc: "ポモドーロ・テクニック対応（25分集中＋5分休憩）。休憩時間に少しだけおしゃべりします。",
+        desc: "ポモドーロ用。休憩時間に少しだけおしゃべり。",
         toneClass: "tone-clear",
         tags: ["作業用", "ポモドーロ"],
         isPremium: false,
@@ -252,11 +252,11 @@ const voiceData = [
     },
     {
         id: "v009",
-        title: "朗読：星の王子さま（抜粋）",
+        title: "朗読：星の王子さま",
         mood: ["sleep", "work"],
         length: "medium",
         duration: "18:00",
-        desc: "静かな雨音を背景に、名作をぽつりぽつりと朗読します。BGM代わりにどうぞ。",
+        desc: "静かな雨音と、ぽつりぽつりとした文学の朗読。",
         toneClass: "tone-deep",
         tags: ["朗読", "文学"],
         isPremium: false,
@@ -266,11 +266,11 @@ const voiceData = [
     },
     {
         id: "v010",
-        title: "【プレミアムフルセット】Lueurの夜をすべてあなたに",
+        title: "Premium Set",
         mood: ["sleep", "comfort"],
         length: "long",
         duration: "120:00",
-        desc: "過去のすべてのボイスの高音質WAV版と、未公開の「朝の目覚ましボイス」を含む特盛コンプリートセット。",
+        desc: "全ボイスの高音質版と、未公開の「朝」のコンプリートセット。",
         toneClass: "tone-deep",
         tags: ["詰め合わせ", "高音質"],
         isPremium: true,
@@ -346,33 +346,15 @@ function renderLibrary() {
         } else {
             // 本公開されている場合のみ、中身を描画する
             card.innerHTML = `
+                <button class="library-fav-btn ${isFav ? 'active' : ''}" data-id="${item.id}" title="お気に入りに登録">
+                    ${isFav ? '★' : '☆'}
+                </button>
                 <div class="library-item-header">
                     <h3 class="library-item-title">
-                        ${item.isPremium ? '<span class="premium-badge">👑 Premium</span>' : ''} 
                         ${item.title}
                     </h3>
-                    <button class="library-fav-btn ${isFav ? 'active' : ''}" data-id="${item.id}" title="お気に入りに登録">
-                        ${isFav ? '★' : '☆'}
-                    </button>
+                    <p class="library-subtitle">⏱ ${item.duration} ${item.isPremium && item.price ? `| ${item.price}` : ''}</p>
                 </div>
-                <div class="library-meta">
-                    <span>⏱ ${item.duration}</span>
-                    ${item.isPremium && item.price ? `<span class="premium-price">${item.price}</span>` : ''}
-                    ${tagsHtml}
-                </div>
-                <p class="library-desc">${item.desc}</p>
-                <div class="library-actions">
-                    ${item.videoId
-                    ? `<button class="library-play-btn embed-play-btn" data-video-id="${item.videoId}">▶ ${item.isPremium ? 'サイト内で試聴' : 'サイト内で再生'}</button>`
-                    : ''}
-                    ${!item.videoId && (item.youtubeUrl || (!item.isPremium && item.url))
-                    ? `<a href="${item.youtubeUrl || item.url}" class="library-play-btn" target="_blank">▶ YouTubeで開く</a>`
-                    : ''}
-                    ${item.boothUrl || (item.isPremium && item.url)
-                    ? `<a href="${item.boothUrl || item.url}" class="library-play-btn buy-btn" target="_blank">🛒 BOOTHで${item.videoId || item.youtubeUrl ? '本編を' : ''}購入する</a>`
-                    : ''}
-                </div>
-                <div class="youtube-player-container" id="player-container-${item.id}"></div>
             `;
         }
         libraryList.appendChild(card);
@@ -380,7 +362,8 @@ function renderLibrary() {
 
     // お気に入りボタンのクリックイベントを設定
     document.querySelectorAll('.library-fav-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation(); // モーダルを開くイベントを発火させない
             const id = this.getAttribute('data-id');
             if (favorites.includes(id)) {
                 favorites = favorites.filter(f => f !== id);
@@ -399,12 +382,83 @@ function renderLibrary() {
         });
     });
 
+    // カードクリックでモーダルを開くイベントを設定
+    document.querySelectorAll('.library-item:not(.coming-soon)').forEach((card, index) => {
+        card.addEventListener('click', function (e) {
+            // お気に入りボタンのクリックは弾く
+            if (e.target.closest('.library-fav-btn')) return;
+
+            // クリックされたアイテムのデータを取得 (filteredのindexに対応)
+            // もしくはdata属性から取得する方が安全ですが、今回はfilteredのindexでも一致します。
+            // Wtf wait! Since it's sorted, we need to match by ID.
+            const titleElement = card.querySelector('.library-item-title').innerText.trim();
+            const item = filtered.find(v => v.title === titleElement);
+            if (item) openModal(item);
+        });
+    });
+}
+
+// === モーダル（ポップアップ）機能の実装 ===
+function openModal(item) {
+    // 既存のモーダルがあれば削除
+    const existingModal = document.getElementById('lueur-modal');
+    if (existingModal) existingModal.remove();
+
+    const tagsHtml = item.tags.map(t => `<span class="library-tag">${t}</span>`).join('');
+
+    // Play button logic
+    let actionsHtml = '';
+    if (item.videoId) {
+        actionsHtml += `<button class="library-play-btn embed-play-btn" data-video-id="${item.videoId}">▶ サイト内で${item.isPremium ? '試聴' : '再生'}</button>`;
+    } else if (item.youtubeUrl || (!item.isPremium && item.url)) {
+        actionsHtml += `<a href="${item.youtubeUrl || item.url}" class="library-play-btn" target="_blank">▶ YouTube</a>`;
+    }
+
+    if (item.boothUrl || (item.isPremium && item.url)) {
+        actionsHtml += `<a href="${item.boothUrl || item.url}" class="library-play-btn buy-btn" target="_blank">🛒 BOOTH</a>`;
+    }
+
+    const modal = document.createElement('div');
+    modal.id = 'lueur-modal';
+    modal.className = `modal-overlay fade-in`;
+    modal.innerHTML = `
+        <div class="modal-content">
+            <button class="modal-close-btn">&times;</button>
+            <div class="modal-header">
+                <h2>${item.title}</h2>
+                <p>⏱ ${item.duration} ${item.isPremium && item.price ? `| ${item.price}` : ''}</p>
+            </div>
+            <div class="modal-body">
+                <div class="library-meta">
+                    ${item.isPremium ? '<span class="library-tag" style="background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.3); color: #ffd700;">👑 Premium</span>' : ''}
+                    ${tagsHtml}
+                </div>
+                <p class="library-desc">${item.desc}</p>
+                
+                <div class="youtube-player-container" id="modal-player-container"></div>
+
+                <div class="library-actions">
+                    ${actionsHtml}
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden'; // 背景のスクロールを止める
+
+    // 閉じるボタンのイベント
+    modal.querySelector('.modal-close-btn').addEventListener('click', closeModal);
+    modal.addEventListener('click', function (e) {
+        if (e.target === modal) closeModal(); // 背景クリックで閉じる
+    });
+
     // サイト内再生ボタンのイベント
-    document.querySelectorAll('.embed-play-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
+    const playBtn = modal.querySelector('.embed-play-btn');
+    if (playBtn) {
+        playBtn.addEventListener('click', function () {
             const videoId = this.getAttribute('data-video-id');
-            const containerId = this.closest('.library-item').querySelector('.youtube-player-container').id;
-            const container = document.getElementById(containerId);
+            const container = document.getElementById('modal-player-container');
 
             if (container.classList.contains('active')) {
                 // すでに開いていれば閉じる（iframe削除）
@@ -412,14 +466,26 @@ function renderLibrary() {
                 container.classList.remove('active');
                 this.textContent = '▶ サイト内で再生';
             } else {
-                // 開く（iframe生成）- エラー153対策としてoriginパラメータを追加、ドメイン制限を回避しやすい設定へ
+                // 開く（iframe生成）
                 const domain = window.location.origin;
                 container.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&origin=${domain}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
                 container.classList.add('active');
                 this.textContent = '▼ 閉じる';
             }
         });
-    });
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('lueur-modal');
+    if (modal) {
+        modal.classList.remove('fade-in');
+        modal.classList.add('fade-out');
+        setTimeout(() => {
+            modal.remove();
+            document.body.style.overflow = ''; // スクロール復帰
+        }, 400); // アニメーション時間待つ
+    }
 }
 
 // 簡易フィルターボタンのクリックイベント
